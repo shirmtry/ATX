@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sàn ATX - Ăn Đậm Đánh Trader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c2461, #1e3799, #4a69bd);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .notification-bar {
+            background: linear-gradient(to right, #ff9f43, #feca57);
+            color: #2c3e50;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .notification-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #ffdd59;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promo-banner {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .promo-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .promo-banner p {
+            font-size: 1.2rem;
+        }
+
+        .telegram-section {
+            background: linear-gradient(135deg, #0088cc, #26a5e4);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .telegram-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            color: #0088cc;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .telegram-link i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .telegram-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .image-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .image-info {
+            padding: 15px;
+        }
+
+        .image-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffdd59;
+        }
+
+        .winning-section {
+            margin: 50px 0;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .winning-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ffdd59;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 300px;
+            margin: 0 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #000;
+            display: block;
+        }
+
+        .carousel-caption {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .carousel-caption h3 {
+            color: #ffdd59;
+            margin-bottom: 5px;
+        }
+
+        .carousel-nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .carousel-nav button {
+            background: #ffdd59;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #0c2461;
+            transition: background 0.3s;
+        }
+
+        .carousel-nav button:hover {
+            background: #ffc929;
+        }
+
+        .platform-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .platform-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffdd59;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: #ffdd59;
+            margin-bottom: 15px;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #ffdd59;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+
+        .warning {
+            color: #ff9f43;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .referral-link {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .referral-link a {
+            color: #ffdd59;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .referral-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal xem ảnh */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            display: block;
+            max-width: 90%;
+            max-height: 80%;
+            margin: auto;
+            border-radius: 8px;
+        }
+
+        .modal-caption {
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #ffdd59;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-item {
+                width: 250px;
+            }
+            
+            .notification-content {
+                white-space: normal;
+                animation: none;
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Thêm dòng chạy thông báo -->
+        <div class="notification-bar">
+            <div class="notification-content">
+    🎉 Chúc mừng chị Nguyễn Thanh Hương (Hà Nội) vừa đăng ký KYC thành công và nhận ngay 200K tiền thưởng từ ATX! 
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    🚀 Anh Trần Minh Đức (TP.HCM) đã rút thành công 15,000,000 VND từ lợi nhuận giao dịch!
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    💰 Bạn đã đăng ký nhận 200K chưa? Đừng bỏ lỡ cơ hội!
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    🔥 Hơn 2,000 người đã nhận thưởng chỉ trong 24 giờ qua – bạn còn chờ gì nữa?
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    ⚡ Thời gian có hạn: Ưu đãi 200K sẽ kết thúc khi đủ số lượng!
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    ✅ Đăng ký, xác thực KYC và nhận thưởng ngay – chỉ mất 2 phút!
+            </div>
+
+        </div>
+
+        <header>
+            <h1>SÀN GIAO DỊCH ATX</h1>
+            <p>Nền tảng giao dịch hàng đầu cho các trader Việt Nam - Nơi "ăn đậm đánh trader" trở thành hiện thực</p>
+        </header>
+
+        <div class="promo-banner">
+            <h2>KHUYẾN MÃI ĐẶC BIỆT</h2>
+            <p>Đăng ký tài khoản và xác thực KYC ngay để nhận 200K tiền thưởng!</p>
+        </div>
+
+        <div class="referral-link">
+            <p>Đăng ký tại: <a href="https://attlas.io/r/21392223" target="_blank">https://attlas.io/r/21392223</a></p>
+        </div>
+
+        <!-- Phần Telegram mới -->
+        <div class="telegram-section">
+            <h2><i class="fab fa-telegram"></i> THAM GIA NHÓM TELEGRAM CHIA SẺ LỆNH</h2>
+            <p>Tham gia ngay nhóm Telegram của chúng tôi để nhận được những tín hiệu giao dịch, chia sẻ kinh nghiệm và cập nhật thị trường mới nhất từ các trader chuyên nghiệp!</p>
+            <a href="https://t.me/+emlyXE-nL35kYWZl" class="telegram-link" target="_blank">
+                <i class="fab fa-telegram"></i> Tham gia nhóm ngay
+            </a>
+        </div>
+
+        <div class="gallery">
+            <div class="image-card" onclick="openModal('images/1.jpg', 'Giao diện sàn ATX hiện đại')">
+                <img src="images/1.jpg" alt="Giao diện sàn ATX">
+                <div class="image-info">
+                    <h3>Giao Diện Hiện Đại</h3>
+                    <p>Trải nghiệm giao dịch mượt mà với công nghệ tiên tiến nhất</p>
+                </div>
+            </div>
+            <div class="image-card" onclick="openModal('images/2.jpg', 'Công cụ phân tích chuyên sâu')">
+                <img src="images/2.jpg" alt="Công cụ phân tích ATX">
+                <div class="image-info">
+                    <h3>Công Cụ Phân Tích</h3>
+                    <p>Hỗ trợ trader đưa ra quyết định chính xác</p>
+                </div>
+            </div>
+            <div class="image-card" onclick="openModal('images/3.jpg', 'Hỗ trợ khách hàng 24/7')">
+                <img src="images/3.jpg" alt="Hỗ trợ khách hàng ATX">
+                <div class="image-info">
+                    <h3>Hỗ Trợ 24/7</h3>
+                    <p>Đội ngũ chuyên gia luôn sẵn sàng hỗ trợ bạn</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="winning-section">
+            <h2>THÀNH CÔNG CỦA TRADER ATX</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="winningCarousel">
+                    <div class="carousel-item" onclick="openModal('images/4.jpg', 'Lợi nhuận 35% - Trader Nguyễn Minh Anh')">
+                        <img src="images/4.jpg" alt="Trader thành công 1">
+                        <div class="carousel-caption">
+                            <h3>Lợi nhuận 35%</h3>
+                            <p>Trader Nguyễn Minh Anh</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" onclick="openModal('images/5.jpg', 'Lợi nhuận 52% - Trader Trần Quang Huy')">
+                        <img src="images/5.jpg" alt="Trader thành công 2">
+                        <div class="carousel-caption">
+                            <h3>Lợi nhuận 52%</h3>
+                            <p>Trader Trần Quang Huy</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" onclick="openModal('images/6.jpg', 'Lợi nhuận 27% - Trader Lê Thị Phương')">
+                        <img src="images/6.jpg" alt="Trader thành công 3">
+                        <div class="carousel-caption">
+                            <h3>Lợi nhuận 27%</h3>
+                            <p>Trader Lê Thị Phương</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" onclick="openModal('images/7.jpg', 'Lợi nhuận 68% - Trader Phạm Văn Mạnh')">
+                        <img src="images/7.jpg" alt="Trader thành công 4">
+                        <div class="carousel-caption">
+                            <h3>Lợi nhuận 68%</h3>
+                            <p>Trader Phạm Văn Mạnh</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" onclick="openModal('images/1.jpg', 'Lợi nhuận 43% - Trader Hoàng Thu Trang')">
+                        <img src="images/1.jpg" alt="Trader thành công 5">
+                        <div class="carousel-caption">
+                            <h3>Lợi nhuận 43%</h3>
+                            <p>Trader Hoàng Thu Trang</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button id="prevBtn">Trước</button>
+                <button id="nextBtn">Sau</button>
+            </div>
+        </div>
+
+        <div class="platform-info">
+            <h2>TẠI SAO CHỌN ATX?</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Phí Giao Dịch Thấp</h3>
+                    <p>Chi phí giao dịch cạnh tranh nhất thị trường</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Bảo Mật Tối Đa</h3>
+                    <p>Công nghệ bảo mật đa lớp, an toàn tuyệt đối</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Giao Dịch Nhanh</h3>
+                    <p>Xử lý lệnh siêu tốc, không độ trễ</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Rút Tiền Nhanh</h3>
+                    <p>Hỗ trợ rút tiền 24/7, xử lý trong 5 phút</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <h2>SẴN SÀNG GIAO DỊCH?</h2>
+            <p>Tham gia cộng đồng trader thành công ngay hôm nay và nhận 200K tiền thưởng khi đăng ký!</p>
+            <a href="https://attlas.io/r/21392223" class="btn" target="_blank">ĐĂNG KÝ NGAY</a>
+        </div>
+
+        <footer>
+            <p>© 2023 Sàn Giao Dịch ATX. Tất cả quyền được bảo lưu.</p>
+            <p class="warning">Giao dịch tài chính có mức độ rủi ro cao. Vui lòng đảm bảo bạn hiểu rõ các rủi ro trước khi giao dịch.</p>
+        </footer>
+    </div>
+
+    <!-- Modal xem ảnh -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.getElementById('winningCarousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const items = document.querySelectorAll('.carousel-item');
+            const itemWidth = items[0].offsetWidth + 30;
+            let currentPosition = 0;
+            const maxPosition = -((items.length - 3) * itemWidth);
+
+            let autoSlide = setInterval(() => {
+                if (currentPosition > maxPosition) {
+                    currentPosition -= itemWidth;
+                    carousel.style.transform = `translateX(${currentPosition}px)`;
+                } else {
+                    currentPosition = 0;
+                    carousel.style.transform = `translateX(0)`;
+                }
+            }, 3000);
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPosition > maxPosition) {
+                    currentPosition -= itemWidth;
+                    carousel.style.transform = `translateX(${currentPosition}px)`;
+                }
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPosition < 0) {
+                    currentPosition += itemWidth;
+                    carousel.style.transform = `translateX(${currentPosition}px)`;
+                }
+                resetAutoSlide();
+            });
+
+            function resetAutoSlide() {
+                clearInterval(autoSlide);
+                autoSlide = setInterval(() => {
+                    if (currentPosition > maxPosition) {
+                        currentPosition -= itemWidth;
+                        carousel.style.transform = `translateX(${currentPosition}px)`;
+                    } else {
+                        currentPosition = 0;
+                        carousel.style.transform = `translateX(0)`;
+                    }
+                }, 3000);
+            }
+
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlide);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                resetAutoSlide();
+            });
+        });
+
+        // Modal xem ảnh
+        function openModal(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('modalCaption');
+            
+            modal.style.display = 'flex';
+            modalImg.src = src;
+            captionText.innerHTML = caption;
+            
+            // Tắt modal khi nhấn phím ESC
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
